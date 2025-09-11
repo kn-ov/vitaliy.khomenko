@@ -30,10 +30,17 @@
     }
 
     .projects, .skills, .testing-types {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
       margin-bottom: 30px;
       width: 100%;
       position: relative;
       z-index: 2;
+      padding-left: 20px;
+      padding-bottom: 20px;
+      opacity: 0.8;
     }
 
     ul {
@@ -47,7 +54,7 @@
 
     .badge {
       display: inline-block;
-      margin: 5px 5px 5px 0;
+      margin: 15px 5px 5px 0;
       padding: 5px 10px;
       background-color: #ecf0f1;
       border-radius: 4px;
@@ -77,6 +84,7 @@
       padding: 15px 20px;
       margin-bottom: 20px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      opacity: 0.8;
     }
 
     .contact h2 {
@@ -102,13 +110,10 @@
         display: flex;
         flex-direction: column;
       }
+      
       .sidebar {
         position: static;
         width: auto;
-      }
-      .about, .contact {
-        margin-bottom: 20px;
-        box-shadow: none;
       }
     }
   </style>
