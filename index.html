@@ -35,7 +35,7 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       border-radius: 8px;
       margin-bottom: 30px;
-      width: 100%;
+      width: 1000x;
       position: relative;
       z-index: 2;
       padding-left: 20px;
@@ -247,13 +247,28 @@
     let ripples = [];
 
     document.addEventListener("mousemove", (e) => {
-        const offsetpx = 50;
+      const offsetpx = 50;
       ripples.push({
         chars: [],
         x: e.clientX + offsetpx,
         y: e.clientY + offsetpx
       });
     });
+    
+
+    document.addEventListener("touchmove", (e) => {
+      const startX = e.touches[0].clientX;
+      const startY = e.touches[0].clientY;
+      const offsetpx = 50;
+      ripples.push({
+        chars: [],
+        x: startX + offsetpx,
+        y: startY + offsetpx
+      });
+    });
+    
+    
+    
 
     const words = ["HELLO, WORLD!", "SDET", "VITALIY", "QA", "AUTOMATION"];
 
