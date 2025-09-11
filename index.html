@@ -12,6 +12,7 @@
       max-width: 900px;
       color: #2c3e50;
       text-align: left;
+      overflow-x: hidden;
     }
 
     h1, h2, h3 {
@@ -31,6 +32,8 @@
     .projects, .skills, .testing-types {
       margin-bottom: 30px;
       width: 100%;
+      position: relative;
+      z-index: 2;
     }
 
     ul {
@@ -64,6 +67,7 @@
       top: 80px;
       right: 40px;
       width: 400px;
+      z-index: 2;
     }
 
     .about, .contact {
@@ -79,11 +83,24 @@
       margin-top: 0;
     }
 
+    /* Canvas background */
+    #matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
     /* Responsive */
     @media (max-width: 1100px) {
       body {
         max-width: 100%;
         margin: 20px;
+        display: flex;
+        flex-direction: column;
       }
       .sidebar {
         position: static;
@@ -97,6 +114,9 @@
   </style>
 </head>
 <body>
+  <!-- Canvas background -->
+  <canvas id="matrix"></canvas>
+
   <!-- Fixed Sidebar -->
   <div class="sidebar">
     <div class="about">
@@ -119,16 +139,16 @@
     <h2>🚀 Projects and Code Examples</h2>
     <ul>
       <li>
-        <a href="https://github.com/vitaliy-k-sdet/task-api-tests" target="_blank">API Test Automation Project</a> – Automated API testing project in TypeScript/Playwright for RESTful APIs, request/response validation, dynamic test data, and structured reports.
+        <a href="https://github.com/vitaliy-k-sdet/task-api-tests" target="_blank">API Test Automation Project</a> > Automated API test project in TypeScript/Playwright for RESTful APIs.
       </li>
       <li>
-        <a href="https://github.com/vitaliy-k-sdet/tasks_typescript_js" target="_blank">TS/JS Code Examples</a> – Code examples of tasks in TypeScript/JavaScript programming languages.
+        <a href="https://github.com/vitaliy-k-sdet/tasks_typescript_js" target="_blank">TS/JS Code Examples</a> > Code examples in TypeScript/JavaScript programming languages.
       </li>
       <li>
-        <a href="https://github.com/vitaliy-k-sdet/tasks_c_sharp" target="_blank">C# Code Examples</a> – Code examples of tasks in C# programming language.
+        <a href="https://github.com/vitaliy-k-sdet/tasks_c_sharp" target="_blank">C# Code Examples</a> > Code examples in C# programming language.
       </li>
       <li>
-        <a href="https://github.com/vitaliy-k-sdet/tasks_java" target="_blank">Java Code Examples</a> – Code examples of tasks in Java programming language.
+        <a href="https://github.com/vitaliy-k-sdet/tasks_java" target="_blank">Java Code Examples</a> > Code examples in Java programming language.
       </li>
     </ul>
   </div>
@@ -165,7 +185,7 @@
   <div class="testing-types">
     <h2>✅ Methodologies & Testing Types</h2>
     <div class="badges">
-      <span class="badge">Waterfall | Agile (SCRUM, Kanban) | STLC | SDLC</span>
+      <span class="badge">Agile (SCRUM, Kanban) | STLC | SDLC | Waterfall</span>
 
       <div>
         <h3>Automation Testing</h3>
@@ -205,5 +225,85 @@
       </div>
     </div>
   </div>
+
+  <!-- Matrix Ripple Script -->
+  <script>
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    let ripples = [];
+
+    document.addEventListener("mousemove", (e) => {
+        const offsetpx = 100;
+      ripples.push({
+        chars: [],
+        x: e.clientX + offsetpx,
+        y: e.clientY + offsetpx
+      });
+    });
+
+    const words = ["HELLO, WORLD!", "SDET", "VITALIY", "QA", "AUTOMATION"];
+
+    function randomWord() {
+      return words[Math.floor(Math.random() * words.length)];
+    }
+
+    function randomColor() {
+      return `rgb(${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)})`;
+    }
+
+    function drawRipple(r) {
+      ctx.save();
+      ctx.font = "bold 16px monospace";
+      if (r.chars.length === 0) {
+        // Initialize random moving chars
+        for (let i = 0; i < 10; i++) {
+          r.chars.push({
+            char: randomWord(),
+            x: r.x,
+            y: r.y,
+            vx: (Math.random() - 0.5) * 4,
+            vy: (Math.random() - 0.5) * 4,
+            alpha: 0.5,
+            color: randomColor()
+          });
+        }
+      }
+
+      r.chars.forEach((c, i) => {
+        c.x += c.vx;
+        c.y += c.vy;
+        c.alpha -= 0.003; // smooth fade
+        ctx.fillStyle = `rgba(${c.color.slice(4,-1)},${c.alpha})`; // rgba color with alpha
+        ctx.fillText(c.char, c.x, c.y);
+      });
+
+      // Remove fully faded chars
+      r.chars = r.chars.filter(c => c.alpha > 0);
+      ctx.restore();
+    }
+
+    function animate() {
+      ctx.fillStyle = "rgba(238, 247, 248)"; // fade background
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+
+      ripples.forEach((r, i) => {
+        drawRipple(r);
+        if (r.chars.length === 0) ripples.splice(i,1);
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
 </body>
 </html>
