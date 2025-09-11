@@ -5,19 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vitaliy Khomenko | QA Automation Engineer (SDET)</title>
   <style>
+    /* Base Styles */
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
       margin: 40px;
-      max-width: 900px;
       color: #2c3e50;
-      text-align: left;
+      background-color: #eef7f8;
       overflow-x: hidden;
     }
 
     h1, h2, h3 {
       color: #34495e;
-      text-align: left;
     }
 
     a {
@@ -29,17 +28,27 @@
       text-decoration: underline;
     }
 
+    /* Main Layout using CSS Grid */
+    .main-container {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 40px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      grid-column: 1 / 2;
+    }
+
     .projects, .skills, .testing-types {
       background: #f9f9f9;
       border: 1px solid #ddd;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       border-radius: 8px;
       margin-bottom: 30px;
-      width: 1000x;
-      position: relative;
-      z-index: 2;
-      padding-left: 20px;
-      padding-bottom: 20px;
+      padding: 20px;
       opacity: 0.8;
     }
 
@@ -54,27 +63,26 @@
 
     .badge {
       display: inline-block;
-      margin: 15px 5px 5px 0;
+      margin: 5px;
       padding: 5px 10px;
       background-color: #ecf0f1;
       border-radius: 4px;
       font-size: 0.9em;
     }
 
-    .skills, .testing-types {
+    .skills .badges, .testing-types .badges {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 10px;
     }
 
-    /* Fixed Sidebar for About + Contact */
+    /* Sidebar */
     .sidebar {
-      position: fixed;
-      top: 80px;
-      right: 40px;
-      width: 400px;
-      z-index: 2;
+      grid-column: 2 / 3;
+      position: sticky;
+      top: 40px;
+      align-self: start;
+      width: 100%;
     }
 
     .about, .contact {
@@ -102,136 +110,137 @@
       pointer-events: none;
     }
 
-    /* Responsive */
+    /* Responsive adjustments for smaller screens */
     @media (max-width: 1100px) {
-      body {
-        max-width: 100%;
-        margin: 20px;
-        display: flex;
-        flex-direction: column;
+      .main-container {
+        grid-template-columns: 1fr;
       }
-      
       .sidebar {
+        order: -1; /* This is the key change: sets the sidebar to the top */
+        grid-column: 1 / -1;
         position: static;
-        width: auto;
+        top: auto;
+      }
+      .main-content {
+        grid-column: 1 / -1;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Canvas background -->
   <canvas id="matrix"></canvas>
 
-  <!-- Fixed Sidebar -->
-  <div class="sidebar">
-    <div class="about">
-      <h1>Hi, I'm Vitaliy 👋</h1>
-      <p>
-        Senior QA Automation Engineer (SDET) with over 15 years of experience in Test Automation and Quality Assurance. Proficient in TypeScript/JavaScript, C#, Java, Playwright, Selenium, GitHub Actions, and various other relevant tools and technologies. ISTQB Certified.
-      </p>
-    </div>
-
-    <div class="contact">
-      <h2>📫 Contact Me</h2>
-      <p>Email: <a href="mailto:vitaliy.khomenko@gmail.com">vitaliy.khomenko@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/vitaliykhomenko/" target="_blank">Vitaliy Khomenko</a></p>
-      <p>GitHub: <a href="https://github.com/vitaliy-k-sdet" target="_blank">github.com/vitaliy-k-sdet</a></p>
-    </div>
-  </div>
-
-  <!-- Main Content -->
-  <div class="projects">
-    <h2>🚀 Projects and Code Examples</h2>
-    <ul>
-      <li>
-        <a href="https://github.com/vitaliy-k-sdet/task-api-tests" target="_blank">API Test Automation Project</a> > Automated API test project in TypeScript/Playwright for RESTful APIs.
-      </li>
-      <li>
-        <a href="https://github.com/vitaliy-k-sdet/tasks_typescript_js" target="_blank">TS/JS Code Examples</a> > Code examples in TypeScript/JavaScript programming languages.
-      </li>
-      <li>
-        <a href="https://github.com/vitaliy-k-sdet/tasks_c_sharp" target="_blank">C# Code Examples</a> > Code examples in C# programming language.
-      </li>
-      <li>
-        <a href="https://github.com/vitaliy-k-sdet/tasks_java" target="_blank">Java Code Examples</a> > Code examples in Java programming language.
-      </li>
-    </ul>
-  </div>
-
-  <div class="skills">
-    <h2>🛠️ Skills & Tools</h2>
-    <div class="badges">
-      <span class="badge">TypeScript</span>
-      <span class="badge">JavaScript</span>
-      <span class="badge">Playwright</span>
-      <span class="badge">NodeJS</span>
-      <span class="badge">GIT | SVN</span>
-      <span class="badge">GitHub Actions</span>
-      <span class="badge">YAML</span>
-      <span class="badge">Azure DevOps</span>
-      <span class="badge">Slack Integrations</span>
-      <span class="badge">WebSwing</span>
-      <span class="badge">API Testing | RESTful | SOAP | GraphQL</span>
-      <span class="badge">C#</span>
-      <span class="badge">Selenium</span>
-      <span class="badge">Appium</span>
-      <span class="badge">BrowserStack | LambdaTest</span>
-      <span class="badge">Java</span>
-      <span class="badge">Jenkins</span>
-      <span class="badge">Powershell</span>
-      <span class="badge">JMeter | Postman</span>
-      <span class="badge">GitHub Copilot | ChatGPT | Claude Sonnet | Google Gemini</span>
-      <span class="badge">MySQL | SQL</span>
-      <span class="badge">TestRail | TestLink | AIO | JIRA | Confluence | Rally | Trello | Asana | PowerBI</span>
-      <span class="badge">Windows | Linux | Mac OS</span>
-    </div>
-  </div>
-
-  <div class="testing-types">
-    <h2>✅ Methodologies & Testing Types</h2>
-    <div class="badges">
-      <span class="badge">Agile (SCRUM, Kanban) | STLC | SDLC | Waterfall</span>
-
-      <div>
-        <h3>Automation Testing</h3>
-        <span class="badge">Integration Test Automation</span>
-        <span class="badge">Functional Test Automation</span>
-        <span class="badge">Regression Test Automation</span>
-        <span class="badge">Smoke & Sanity Automation</span>
-        <span class="badge">API Testing Automation</span>
-        <span class="badge">UI Automation (Web, Mobile)</span>
-        <span class="badge">Performance and Load Testing Automation</span>
+  <div class="main-container">
+    <div class="main-content">
+      <div class="projects">
+        <h2>🚀 Projects and Code Examples</h2>
+        <ul>
+          <li>
+            <a href="https://github.com/vitaliy-k-sdet/task-api-tests" target="_blank">API Test Automation Project</a> > Automated API test project in TypeScript/Playwright for RESTful APIs.
+          </li>
+          <li>
+            <a href="https://github.com/vitaliy-k-sdet/tasks_typescript_js" target="_blank">TS/JS Code Examples</a> > Code examples in TypeScript/JavaScript programming languages.
+          </li>
+          <li>
+            <a href="https://github.com/vitaliy-k-sdet/tasks_c_sharp" target="_blank">C# Code Examples</a> > Code examples in C# programming language.
+          </li>
+          <li>
+            <a href="https://github.com/vitaliy-k-sdet/tasks_java" target="_blank">Java Code Examples</a> > Code examples in Java programming language.
+          </li>
+        </ul>
       </div>
 
-      <div>
-        <h3>Manual Testing</h3>
-        <span class="badge">Functional Testing</span>
-        <span class="badge">Integration Testing</span>
-        <span class="badge">Regression Testing</span>
-        <span class="badge">Smoke Testing</span>
-        <span class="badge">Sanity Testing</span>
-        <span class="badge">Acceptance (UAT)</span>
-        <span class="badge">API Testing</span>
-        <span class="badge">E2E UI Testing</span>
-        <span class="badge">Performance Testing</span>
-        <span class="badge">Security Testing</span>
-        <span class="badge">Exploratory Testing</span>
-        <span class="badge">Usability Testing</span>
-        <span class="badge">Compatibility Testing</span>
-        <span class="badge">Cross-browser | Cross-platform Testing</span>
-        <span class="badge">Mobile | Tablet | Desktop Testing</span>
-        <span class="badge">Localization & Internationalization Testing</span>
-        <span class="badge">Compliance Testing</span>
-        <span class="badge">A/B Testing</span>
-        <span class="badge">Ad-hoc Testing</span>
-        <span class="badge">Black Box Testing</span>
-        <span class="badge">White Box Testing</span>
-        <span class="badge">Gray Box Testing</span>
+      <div class="skills">
+        <h2>🛠️ Skills & Tools</h2>
+        <div class="badges">
+          <span class="badge">TypeScript</span>
+          <span class="badge">JavaScript</span>
+          <span class="badge">Playwright</span>
+          <span class="badge">NodeJS</span>
+          <span class="badge">GIT | SVN</span>
+          <span class="badge">GitHub Actions</span>
+          <span class="badge">YAML</span>
+          <span class="badge">Azure DevOps</span>
+          <span class="badge">Slack Integrations</span>
+          <span class="badge">WebSwing</span>
+          <span class="badge">API Testing | RESTful | SOAP | GraphQL</span>
+          <span class="badge">C#</span>
+          <span class="badge">Selenium</span>
+          <span class="badge">Appium</span>
+          <span class="badge">BrowserStack | LambdaTest</span>
+          <span class="badge">Java</span>
+          <span class="badge">Jenkins</span>
+          <span class="badge">Powershell</span>
+          <span class="badge">JMeter | Postman</span>
+          <span class="badge">GitHub Copilot | ChatGPT | Claude Sonnet | Google Gemini</span>
+          <span class="badge">MySQL | SQL</span>
+          <span class="badge">TestRail | TestLink | AIO | JIRA | Confluence | Rally | Trello | Asana | PowerBI</span>
+          <span class="badge">Windows | Linux | Mac OS</span>
+        </div>
+      </div>
+
+      <div class="testing-types">
+        <h2>✅ Methodologies & Testing Types</h2>
+        <div class="badges">
+          <span class="badge">Agile (SCRUM, Kanban) | STLC | SDLC | Waterfall</span>
+
+          <div>
+            <h3>Automation Testing</h3>
+            <span class="badge">Integration Test Automation</span>
+            <span class="badge">Functional Test Automation</span>
+            <span class="badge">Regression Test Automation</span>
+            <span class="badge">Smoke & Sanity Automation</span>
+            <span class="badge">API Testing Automation</span>
+            <span class="badge">UI Automation (Web, Mobile)</span>
+            <span class="badge">Performance and Load Testing Automation</span>
+          </div>
+
+          <div>
+            <h3>Manual Testing</h3>
+            <span class="badge">Functional Testing</span>
+            <span class="badge">Integration Testing</span>
+            <span class="badge">Regression Testing</span>
+            <span class="badge">Smoke Testing</span>
+            <span class="badge">Sanity Testing</span>
+            <span class="badge">Acceptance (UAT)</span>
+            <span class="badge">API Testing</span>
+            <span class="badge">E2E UI Testing</span>
+            <span class="badge">Performance Testing</span>
+            <span class="badge">Security Testing</span>
+            <span class="badge">Exploratory Testing</span>
+            <span class="badge">Usability Testing</span>
+            <span class="badge">Compatibility Testing</span>
+            <span class="badge">Cross-browser | Cross-platform Testing</span>
+            <span class="badge">Mobile | Tablet | Desktop Testing</span>
+            <span class="badge">Localization & Internationalization Testing</span>
+            <span class="badge">Compliance Testing</span>
+            <span class="badge">A/B Testing</span>
+            <span class="badge">Ad-hoc Testing</span>
+            <span class="badge">Black Box Testing</span>
+            <span class="badge">White Box Testing</span>
+            <span class="badge">Gray Box Testing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="about">
+        <h1>Hi, I'm Vitaliy 👋</h1>
+        <p>
+          Senior QA Automation Engineer (SDET) with over 15 years of experience in Test Automation and Quality Assurance. Proficient in TypeScript/JavaScript, C#, Java, Playwright, Selenium, GitHub Actions, and various other relevant tools and technologies. ISTQB Certified.
+        </p>
+      </div>
+
+      <div class="contact">
+        <h2>📫 Contact Me</h2>
+        <p>Email: <a href="mailto:vitaliy.khomenko@gmail.com">vitaliy.khomenko@gmail.com</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/vitaliykhomenko/" target="_blank">Vitaliy Khomenko</a></p>
+        <p>GitHub: <a href="https://github.com/vitaliy-k-sdet" target="_blank">github.com/vitaliy-k-sdet</a></p>
       </div>
     </div>
   </div>
 
-  <!-- Matrix Ripple Script -->
   <script>
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
@@ -247,19 +256,18 @@
     let ripples = [];
 
     document.addEventListener("mousemove", (e) => {
-      const offsetpx = 50;
+      const offsetpx = 30;
       ripples.push({
         chars: [],
         x: e.clientX + offsetpx,
         y: e.clientY + offsetpx
       });
     });
-    
 
     document.addEventListener("touchmove", (e) => {
       const startX = e.touches[0].clientX;
       const startY = e.touches[0].clientY;
-      const offsetpx = 50;
+      const offsetpx = 30;
       ripples.push({
         chars: [],
         x: startX + offsetpx,
@@ -267,9 +275,6 @@
       });
     });
     
-    
-    
-
     const words = ["HELLO, WORLD!", "SDET", "VITALIY", "QA", "AUTOMATION"];
 
     function randomWord() {
